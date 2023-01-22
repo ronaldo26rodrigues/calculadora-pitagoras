@@ -33,8 +33,8 @@ function App() {
       </button>
 
       <Triangulo
-        canvasSize={500}
-        canvasPadding={60}
+        canvasSize={600}
+        canvasPadding={100}
         valoresAbsolutos={valoresAbsolutos}
       />
     </div>

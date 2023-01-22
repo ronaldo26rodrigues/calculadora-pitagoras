@@ -1,19 +1,18 @@
 import React from "react";
 import Canvas from "./Canvas";
 
+
 interface TrianguloProps {
   canvasSize: number;
   canvasPadding: number;
-  valoresAbsolutos: {
-    catetoA: number;
+  valoresAbsolutos: {catetoA: number;
     catetoB: number;
     anguloA: number;
     anguloB: number;
     hipotenusa: number;
     altura: number;
     h1: number;
-    h2: number;
-  };
+    h2: number;}
 }
 
 export function Triangulo({canvasSize, valoresAbsolutos, canvasPadding}:TrianguloProps) {
@@ -27,7 +26,7 @@ export function Triangulo({canvasSize, valoresAbsolutos, canvasPadding}:Triangul
       h1: 0,
       h2: 0,
     }; // estes valores são calculados para que o triângulo se encaixe na área do canvas
-
+    
     var proporcaoHipotenusa = 0; // valor da reta m, cateto de um dos triângulos formados pela reta da altura
     
     // calcula as medidas relativas ao canvas, partindo dos valores vindos da calculadora
@@ -95,18 +94,26 @@ export function Triangulo({canvasSize, valoresAbsolutos, canvasPadding}:Triangul
         ctx.strokeStyle = "#ffffff"
         
         ctx.fillStyle = "white"
-        ctx.font = "20px Arial"
+        ctx.font = "28px Arial"
+
+        function txtLegenda(valor:number, seZero: string, eAngulo=false) {
+            return `${valor==0?seZero:valor}${eAngulo?"º":""}`
+        }
 
         // legendas
-        ctx.fillText("a", pontoPartida['x']-18,250);
-        ctx.fillText("A", pontoPartida['x']-10,pontoPartida['y']-5);
-        ctx.fillText("B", pontoPartida['x']+valoresRelativos['catetoB']+5,pontoPartida['y']+valoresRelativos['catetoA']+5);
-        ctx.fillText("b", 250, pontoPartida['y']+valoresRelativos['catetoA']+20);
+        ctx.textAlign = "end";
+        ctx.fillText(txtLegenda(valoresAbsolutos.catetoA, "a"), pontoPartida['x']-18,250);
+        ctx.textAlign = "start";
+        ctx.fillText(txtLegenda(valoresAbsolutos.anguloA, "A", true), pontoPartida['x']-10,pontoPartida['y']-5);
+        ctx.fillText(txtLegenda(valoresAbsolutos.anguloB, "B"), pontoPartida['x']+valoresRelativos['catetoB']+5,pontoPartida['y']+valoresRelativos['catetoA']+10);
+        ctx.fillText(txtLegenda(valoresAbsolutos.catetoB, "b"), 250, pontoPartida['y']+valoresRelativos['catetoA']+25);
 
-        ctx.fillText("c", pontoPartida['x']+0.5*valoresRelativos['catetoB'], pontoPartida['y']+(0.45)*valoresRelativos['catetoA']);
-        ctx.fillText("m", pontoPartida['x']+0.25*valoresRelativos['catetoB'], pontoPartida['y']+(0.22)*valoresRelativos['catetoA']);
-        ctx.fillText("n", pontoPartida['x']+0.80*valoresRelativos['catetoB'], pontoPartida['y']+(0.75)*valoresRelativos['catetoA']);
-        ctx.fillText("h", pontoPartida['x']+(proporcaoHipotenusa/2*valoresRelativos['catetoB']), pontoPartida['y']+(proporcaoHipotenusa*1.45)*valoresRelativos['catetoA']);
+        ctx.fillText(txtLegenda(valoresAbsolutos.hipotenusa, "c"), pontoPartida['x']+0.5*valoresRelativos['catetoB'], pontoPartida['y']+(0.45)*valoresRelativos['catetoA']);
+        ctx.font = "20px Arial"
+       
+        ctx.fillText(txtLegenda(valoresAbsolutos.h1, "m"), pontoPartida['x']+0.25*valoresRelativos['catetoB'], pontoPartida['y']+(0.22)*valoresRelativos['catetoA']);
+        ctx.fillText(txtLegenda(valoresAbsolutos.h2, "n"), pontoPartida['x']+0.80*valoresRelativos['catetoB'], pontoPartida['y']+(0.75)*valoresRelativos['catetoA']);
+        ctx.fillText(txtLegenda(valoresAbsolutos.altura, "h"), pontoPartida['x']+(proporcaoHipotenusa/2*valoresRelativos['catetoB']), pontoPartida['y']+(proporcaoHipotenusa*1.45)*valoresRelativos['catetoA']);
 
         
         ctx.fillRect(pontoPartida['x'], pontoPartida['y']+valoresRelativos['catetoA']-40, 40, 40); // quadrado do ângulo reto
