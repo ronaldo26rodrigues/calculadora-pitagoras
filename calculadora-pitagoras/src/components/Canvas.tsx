@@ -1,7 +1,8 @@
 import React, { useEffect, useRef } from "react";
 
 interface CanvasProps {
-    draw: (ctx:any)=>void
+    draw: (canvas:any)=>void
+    [x:string]: any
 }
 
 const Canvas = ({draw, ...rest}:CanvasProps) => {
@@ -9,13 +10,13 @@ const Canvas = ({draw, ...rest}:CanvasProps) => {
     
     useEffect(() => {
     const canvas = canvasRef.current as any;
-    const ctx = canvas.getContext('2d');
+    // const ctx = canvas.getContext('2d');
 
-    draw(ctx);
+    draw(canvas);
 
     }, [draw])
 
-    return <canvas ref={canvasRef} {...rest} width="500" height="500"/>
+    return <canvas ref={canvasRef} {...rest}  className="rounded-lg shadow-lg"/>
 } 
 
 export default Canvas
