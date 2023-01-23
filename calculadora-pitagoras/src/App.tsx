@@ -4,6 +4,7 @@ import "./App.css";
 import "./components/Canvas";
 import Canvas from "./components/Canvas";
 import { Triangulo } from "./components/Triangulo";
+import axios from 'axios';
 
 function App() {
   const canvasSize = 500;
@@ -27,14 +28,27 @@ function App() {
       <button
         onClick={() => {
           setCount(count + 1);
+          axios.get('http://localhost:5000/calculadora', {
+            params:{
+          catetoA: 0,
+          catetoB: 0,
+          hipotenusa: 90,
+          anguloA: 30,
+          anguloB: 60,
+          altura: 0,
+          h1: 0,
+          h2: 0,}}).then((res)=>{
+            console.log(res.data);
+            setValoresAbsolutos({...res.data})
+          })
         }}
       >
         botao
       </button>
 
       <Triangulo
-        canvasSize={600}
-        canvasPadding={100}
+        canvasSize={800}
+        canvasPadding={200}
         valoresAbsolutos={valoresAbsolutos}
       />
     </div>
