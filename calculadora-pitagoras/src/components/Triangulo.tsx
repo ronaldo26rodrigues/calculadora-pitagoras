@@ -5,6 +5,9 @@ import Canvas from "./Canvas";
 interface TrianguloProps {
   canvasSize: number;
   canvasPadding: number;
+  labelsOn: boolean;
+  alturaOn: boolean;
+  linhaDestacada: string
   valoresAbsolutos: {catetoA: number;
     catetoB: number;
     anguloA: number;
@@ -15,7 +18,7 @@ interface TrianguloProps {
     h2: number;}
 }
 
-export function Triangulo({canvasSize, valoresAbsolutos, canvasPadding}:TrianguloProps) {
+export function Triangulo({canvasSize, valoresAbsolutos, canvasPadding, labelsOn, alturaOn, linhaDestacada}:TrianguloProps) {
     var valoresRelativos = {
       catetoA: 0,
       catetoB: 0,
@@ -41,6 +44,8 @@ export function Triangulo({canvasSize, valoresAbsolutos, canvasPadding}:Triangul
         valoresRelativos["h2"] = valoresAbsolutos['h2']*proporcao;
         
         proporcaoHipotenusa = (valoresRelativos['h1']*100)/valoresRelativos['hipotenusa']/100;
+        valoresRelativos.anguloA = valoresAbsolutos.anguloA
+        valoresRelativos.anguloB = valoresAbsolutos.anguloB
     }
     calculoMedidasRelativas()
     // calcula o ponto de partida do desenho, para que o triângulo fique centralizado
@@ -73,10 +78,10 @@ export function Triangulo({canvasSize, valoresAbsolutos, canvasPadding}:Triangul
         ctx.lineTo(pontoPartida["x"],pontoPartida["y"]); // desenha a hipotenusa
         
         ctx.moveTo(pontoPartida['x'], pontoPartida['y']+valoresRelativos['catetoA']); // posiciona o cursor no ponto do angulo reto
-        ctx.lineTo(pontoPartida['x']+(proporcaoHipotenusa*valoresRelativos['catetoB']), pontoPartida['y']+(proporcaoHipotenusa)*valoresRelativos['catetoA']); // desenha a reta h (altura)
-
+        if(alturaOn) ctx.lineTo(pontoPartida['x']+((proporcaoHipotenusa)*valoresRelativos['catetoB']), pontoPartida['y']+((proporcaoHipotenusa)*valoresRelativos['catetoA'])); // desenha a reta h (altura)
+        ctx.strokeStyle = "#ffffff"
         ctx.stroke()
-
+        ctx.beginPath()
         ctx.moveTo(pontoPartida['x'],pontoPartida['y']); // posiciona o cursor no ponto A
         ctx.arc(pontoPartida['x'],pontoPartida['y'], 40, (Math.PI/180)*90, (Math.PI/180)*valoresAbsolutos['anguloA'], true); // desenha o ângulo do ponto A
         ctx.moveTo(pontoPartida['x']+valoresRelativos['catetoB'],pontoPartida['y']+valoresRelativos['catetoA']); // posiciona o cursor no ponto B
@@ -87,36 +92,77 @@ export function Triangulo({canvasSize, valoresAbsolutos, canvasPadding}:Triangul
             (Math.PI/180)*180, 
             (Math.PI/180)*(180+valoresAbsolutos['anguloA']), 
             false); //desenha o ângulo do ponto B
-
+            ctx.fillStyle = "white"
+            ctx.fill()
+            ctx.beginPath()
         
         
-        ctx.lineWidth = 3;
-        ctx.strokeStyle = "#ffffff"
+        ctx.lineWidth = 5;
         
-        ctx.fillStyle = "white"
-        ctx.font = "28px Arial"
+        
+        ctx.font = "24px Arial"
 
         function txtLegenda(valor:number, seZero: string, eAngulo=false) {
-            return `${valor==0?seZero:valor}${eAngulo?"º":""}`
+            return `${valor==0?seZero:valor.toFixed(2)}${eAngulo?"º":""}`
         }
 
         // legendas
-        ctx.textAlign = "end";
-        ctx.fillText(txtLegenda(valoresAbsolutos.catetoA, "a"), pontoPartida['x']-18,250);
-        ctx.textAlign = "start";
-        ctx.fillText(txtLegenda(valoresAbsolutos.anguloA, "A", true), pontoPartida['x']-10,pontoPartida['y']-5);
-        ctx.fillText(txtLegenda(valoresAbsolutos.anguloB, "B"), pontoPartida['x']+valoresRelativos['catetoB']+5,pontoPartida['y']+valoresRelativos['catetoA']+10);
-        ctx.fillText(txtLegenda(valoresAbsolutos.catetoB, "b"), 250, pontoPartida['y']+valoresRelativos['catetoA']+25);
+        if(labelsOn){
+            ctx.textAlign = "end";
+            ctx.fillText(txtLegenda(valoresAbsolutos.catetoA, "a"), pontoPartida['x']-18,canvasSize/2);
+            ctx.textAlign = "start";
+            ctx.fillText(txtLegenda(valoresAbsolutos.anguloA, "A", true), pontoPartida['x']-10,pontoPartida['y']-5);
+            ctx.fillText(txtLegenda(valoresAbsolutos.anguloB, "B"), pontoPartida['x']+valoresRelativos['catetoB']+5,pontoPartida['y']+valoresRelativos['catetoA']+10);
+            ctx.fillText(txtLegenda(valoresAbsolutos.catetoB, "b"), canvasSize/2, pontoPartida['y']+valoresRelativos['catetoA']+25);
 
-        ctx.fillText(txtLegenda(valoresAbsolutos.hipotenusa, "c"), pontoPartida['x']+0.5*valoresRelativos['catetoB'], pontoPartida['y']+(0.45)*valoresRelativos['catetoA']);
-        ctx.font = "20px Arial"
-       
-        ctx.fillText(txtLegenda(valoresAbsolutos.h1, "m"), pontoPartida['x']+0.25*valoresRelativos['catetoB'], pontoPartida['y']+(0.22)*valoresRelativos['catetoA']);
-        ctx.fillText(txtLegenda(valoresAbsolutos.h2, "n"), pontoPartida['x']+0.80*valoresRelativos['catetoB'], pontoPartida['y']+(0.75)*valoresRelativos['catetoA']);
-        ctx.fillText(txtLegenda(valoresAbsolutos.altura, "h"), pontoPartida['x']+(proporcaoHipotenusa/2*valoresRelativos['catetoB']), pontoPartida['y']+(proporcaoHipotenusa*1.45)*valoresRelativos['catetoA']);
-
+            ctx.fillText(txtLegenda(valoresAbsolutos.hipotenusa, "c"), pontoPartida['x']+0.5*valoresRelativos['catetoB'], pontoPartida['y']+(0.45)*valoresRelativos['catetoA']);
+            ctx.font = "20px Arial"
+        
+            ctx.fillText(txtLegenda(valoresAbsolutos.h1, "m"), pontoPartida['x']+0.25*valoresRelativos['catetoB'], pontoPartida['y']+(0.22)*valoresRelativos['catetoA']);
+            ctx.fillText(txtLegenda(valoresAbsolutos.h2, "n"), pontoPartida['x']+0.80*valoresRelativos['catetoB'], pontoPartida['y']+(0.75)*valoresRelativos['catetoA']);
+            if(alturaOn) ctx.fillText(txtLegenda(valoresAbsolutos.altura, "h"), pontoPartida['x']+(proporcaoHipotenusa/1.5*valoresRelativos['catetoB']), (pontoPartida['y']+valoresRelativos['catetoA'])-(((1-proporcaoHipotenusa)/2)*valoresRelativos['catetoA']));
+        }
         
         ctx.fillRect(pontoPartida['x'], pontoPartida['y']+valoresRelativos['catetoA']-40, 40, 40); // quadrado do ângulo reto
         ctx.fill();
+        ctx.fillStyle = "red"
+        switch (linhaDestacada) {
+            case "a":
+                ctx.moveTo(pontoPartida["x"],pontoPartida["y"]); // posiciona o cursor no ponto A
+                ctx.lineTo(pontoPartida["x"],pontoPartida['y']+valoresRelativos['catetoA']); // desenha o cateto a
+                break;
+            case "b":
+                ctx.moveTo(pontoPartida["x"],pontoPartida['y']+valoresRelativos['catetoA']); // posiciona o cursor no ponto do angulo reto
+                ctx.lineTo(pontoPartida['x']+valoresRelativos['catetoB'],pontoPartida['y']+valoresRelativos['catetoA']); // desenha o cateto b
+                break;
+            case "c":
+                ctx.moveTo(pontoPartida['x']+valoresRelativos['catetoB'],pontoPartida['y']+valoresRelativos['catetoA']); // posiciona o cursor no ponto B
+                ctx.lineTo(pontoPartida["x"],pontoPartida["y"]); // desenha a hipotenusa
+                break;
+            case "h":
+                ctx.moveTo(pontoPartida['x'], pontoPartida['y']+valoresRelativos['catetoA']); // posiciona o cursor no ponto do angulo reto
+                if(alturaOn) ctx.lineTo(pontoPartida['x']+((proporcaoHipotenusa)*valoresRelativos['catetoB']), pontoPartida['y']+((proporcaoHipotenusa)*valoresRelativos['catetoA'])); // desenha a reta h (altura)
+                break;
+            case "A":
+                ctx.moveTo(pontoPartida['x'],pontoPartida['y']); // posiciona o cursor no ponto A
+                ctx.arc(pontoPartida['x'],pontoPartida['y'], 40, (Math.PI/180)*90, (Math.PI/180)*valoresAbsolutos['anguloA'], true); // desenha o ângulo do ponto A
+                // ctx.fill()
+                break;
+            case "B":
+                ctx.moveTo(pontoPartida['x']+valoresRelativos['catetoB'],pontoPartida['y']+valoresRelativos['catetoA']); // posiciona o cursor no ponto B
+        ctx.arc(
+            pontoPartida['x']+valoresRelativos['catetoB'],
+            pontoPartida['y']+valoresRelativos['catetoA'],
+            40,
+            (Math.PI/180)*180, 
+            (Math.PI/180)*(180+valoresAbsolutos['anguloA']), 
+            false); //desenha o ângulo do ponto B
+            // ctx.fill()
+                break;
+            default:
+                break;
+        }
+        ctx.strokeStyle = "#ff0000";
+        (linhaDestacada=="A"||linhaDestacada=="B")?ctx.fill():ctx.stroke()
     }}/>
 }
