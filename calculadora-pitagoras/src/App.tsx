@@ -3,8 +3,11 @@ import reactLogo from "./assets/react.svg";
 import "./App.css";
 import "./components/Canvas";
 import Canvas from "./components/Canvas";
-import { Triangulo } from "./components/Triangulo";
+import { TriangleShape } from "./components/TriangleShape";
 import { FormInput } from "./components/FormInput";
+import { FormCalc } from "./components/FormCalc";
+import { Results } from "./components/Results";
+import { Triangle } from "./models/Triangle";
 
 function App() {
   const canvasSize = 500;
@@ -22,65 +25,32 @@ function App() {
     altura: 2.4,
     h1: 3,
     h2: 2,
-  });
+    area: 6,
+  } as Triangle);
 
   return (
-    <div className="App">
-      <button
-        onClick={() => {
-          setCount(count + 1);
-        }}
-      >
-        botao
-      </button>
-
-      <Triangulo
-        canvasSize={600}
-        canvasPadding={100}
-        labelsOn={true}
-        alturaOn={true}
-        linhaDestacada={linhaDestacada}
-        valoresAbsolutos={valoresAbsolutos}
-      />
-      <form>
-        <FormInput
-        label="Cateto A"
-        linha="a"
-        name="catetoA"
-        setLinhaDestacada={setLinhaDestacada}
+    <div className="">
+      <div>
+        <h1 className="text-6xl mb-16">
+          Teorema de Pitágoras
+        </h1>
+      </div>
+      <div className="flex justify-around h-max">
+        <Results valoresAbsolutos={valoresAbsolutos} />
+        <TriangleShape
+          canvasSize={500}
+          canvasPadding={100}
+          labelsOn={true}
+          alturaOn={true}
+          linhaDestacada={linhaDestacada}
+          valoresAbsolutos={valoresAbsolutos}
         />
-        <FormInput
-        label="Cateto B"
-        linha="b"
-        name="catetoB"
-        setLinhaDestacada={setLinhaDestacada}
-        />
-        <FormInput
-        label="Hipotenusa"
-        linha="c"
-        name="hipotenusa"
-        setLinhaDestacada={setLinhaDestacada}
-        />
-        <FormInput
-        label="Angulo A"
-        linha="A"
-        name="anguloA"
-        setLinhaDestacada={setLinhaDestacada}
-        />
-        <FormInput
-        label="Angulo B"
-        linha="B"
-        name="anguloB"
-        setLinhaDestacada={setLinhaDestacada}
-        />
-        <FormInput
-        label="Altura"
-        linha="h"
-        name="altura"
-        setLinhaDestacada={setLinhaDestacada}
-        />
-        
-      </form>
+        <FormCalc setLinhaDestacada={setLinhaDestacada} valoresAbsolutos={valoresAbsolutos} setValoresAbsolutos={setValoresAbsolutos}/>
+      </div>
+      <div className="absolute right-20 bottom-4 justify-end flex flex-col items-end">
+      <p >Construído com React e Flask para a seleção de estágio da <a href="https://www.cromai.com" className="text-[#09c184]">Cromai</a></p>
+      <p className="">Feito por <a href="https://github.com/ronaldo26rodrigues" className="text-[#09c184]">Ronaldo Rodrigues</a></p>
+      </div>
     </div>
   );
 }
