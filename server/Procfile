@@ -1,1 +1,1 @@
-we: gunicorn app:main
+we: gunicorn main:app
