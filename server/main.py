@@ -25,27 +25,30 @@ def hello():
             pass
         else:
             return 'Os valores que você inseriu não formam um triângulo retângulo', 400
+    try:
+        if triangulo['catetoA'] != 0 and triangulo['catetoB'] != 0:
+            triangulo['hipotenusa'] = sqrt(triangulo['catetoA']**2+triangulo['catetoB']**2)
+            calcular_angulo_ab()
+        elif triangulo['catetoA'] != 0 and triangulo['hipotenusa'] != 0:
+            triangulo['catetoB'] = sqrt(triangulo['hipotenusa']**2-triangulo['catetoA']**2)
+            calcular_angulo_ab()
+        elif triangulo['catetoB'] != 0 and triangulo['hipotenusa'] != 0:
+            triangulo['catetoA'] = sqrt(triangulo['hipotenusa']**2-triangulo['catetoB']**2)
+            calcular_angulo_ab()
 
-    if triangulo['catetoA'] != 0 and triangulo['catetoB'] != 0:
-        triangulo['hipotenusa'] = sqrt(triangulo['catetoA']**2+triangulo['catetoB']**2)
-        calcular_angulo_ab()
-    elif triangulo['catetoA'] != 0 and triangulo['hipotenusa'] != 0:
-        triangulo['catetoB'] = sqrt(triangulo['hipotenusa']**2-triangulo['catetoA']**2)
-        calcular_angulo_ab()
-    elif triangulo['catetoB'] != 0 and triangulo['hipotenusa'] != 0:
-        triangulo['catetoA'] = sqrt(triangulo['hipotenusa']**2-triangulo['catetoB']**2)
-        calcular_angulo_ab()
+        if (triangulo['anguloA'] != 0 and triangulo['anguloB'] != 0) and (triangulo['catetoA'] == 0 or triangulo['catetoB'] == 0 or triangulo['hipotenusa'] == 0):
+            if triangulo['catetoA'] != 0:
+                triangulo['catetoB'] = triangulo['catetoA']/atan(triangulo['anguloB'])
+                triangulo['hipotenusa'] = sqrt(triangulo['catetoA'] ** 2 + triangulo['catetoB'] ** 2)
+            if triangulo['catetoB'] != 0:
+                triangulo['catetoA'] = tan(triangulo['anguloB'])*triangulo['catetoB']
+                triangulo['hipotenusa'] = sqrt(triangulo['catetoA'] ** 2 + triangulo['catetoB'] ** 2)
+            if triangulo['hipotenusa'] != 0:
+                triangulo['catetoA'] = sin(triangulo['anguloA'])*triangulo['hipotenusa']
+                triangulo['catetoB'] = sqrt(triangulo['hipotenusa'] ** 2 - triangulo['catetoA'] ** 2)
+    except Exception:
+        return 'Estes valores podem não estar corretos', 400
 
-    if (triangulo['anguloA'] != 0 and triangulo['anguloB'] != 0) and (triangulo['catetoA'] == 0 or triangulo['catetoB'] == 0 or triangulo['hipotenusa'] == 0):
-        if triangulo['catetoA'] != 0:
-            triangulo['catetoB'] = triangulo['catetoA']/atan(triangulo['anguloB'])
-            triangulo['hipotenusa'] = sqrt(triangulo['catetoA'] ** 2 + triangulo['catetoB'] ** 2)
-        if triangulo['catetoB'] != 0:
-            triangulo['catetoA'] = tan(triangulo['anguloB'])*triangulo['catetoB']
-            triangulo['hipotenusa'] = sqrt(triangulo['catetoA'] ** 2 + triangulo['catetoB'] ** 2)
-        if triangulo['hipotenusa'] != 0:
-            triangulo['catetoA'] = sin(triangulo['anguloA'])*triangulo['hipotenusa']
-            triangulo['catetoB'] = sqrt(triangulo['hipotenusa'] ** 2 - triangulo['catetoA'] ** 2)
 
     triangulo['altura'] = (triangulo['catetoA']*triangulo['catetoB'])/triangulo['hipotenusa']
     triangulo['h1'] = sqrt(triangulo['catetoA']**2-triangulo['altura']**2)

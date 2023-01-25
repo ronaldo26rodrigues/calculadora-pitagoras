@@ -65,7 +65,7 @@ export function TrianguloDraw({canvas, valoresAbsolutos, valoresRelativos, ponto
     ctx.lineWidth = 5;
     
     
-    ctx.font = '24px Arial'
+    ctx.font = '22px Arial'
 
     function txtLegenda(valor:number, seZero: string, eAngulo=false) {
         return `${valor==0?seZero:valor.toFixed(2)}${eAngulo?'º':''}`
@@ -74,7 +74,7 @@ export function TrianguloDraw({canvas, valoresAbsolutos, valoresRelativos, ponto
     // legendas
     if(labelsOn){
         ctx.textAlign = 'end';
-        ctx.fillText(txtLegenda(valoresAbsolutos.catetoA, 'a'), pontoPartida.x-18,canvasSize/2);
+        ctx.fillText(txtLegenda(valoresAbsolutos.catetoA, 'a'), pontoPartida.x-12,canvasSize/2);
         ctx.textAlign = 'start';
         ctx.fillText(txtLegenda(valoresAbsolutos.anguloA, 'A', true), pontoPartida.x-10,pontoPartida.y-5);
         ctx.fillText(txtLegenda(valoresAbsolutos.anguloB, 'B'), pontoPartida.x+catetoB+5,pontoPartida.y+catetoA+10);
@@ -88,7 +88,7 @@ export function TrianguloDraw({canvas, valoresAbsolutos, valoresRelativos, ponto
         if(alturaOn) ctx.fillText(txtLegenda(valoresAbsolutos.altura, 'h'), pontoPartida.x+(proporcaoHipotenusa/1.5*catetoB), (pontoPartida.y+catetoA)-(((1-proporcaoHipotenusa)/2)*catetoA));
     }
     
-    ctx.fillRect(pontoPartida.x, pontoPartida.y+catetoA-40, 40, 40); // quadrado do ângulo reto
+    ctx.fillRect(pontoPartida.x, pontoPartida.y+catetoA-25, 25, 25); // quadrado do ângulo reto
     ctx.fill();
     ctx.fillStyle = 'red'
     switch (linhaDestacada) {
