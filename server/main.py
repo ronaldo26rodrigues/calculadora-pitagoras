@@ -16,14 +16,15 @@ def hello():
         'hipotenusa': float(request.args.get('hipotenusa')),
         'altura': float(request.args.get('altura')),
         'h1': float(request.args.get('h1')),
-        'h2': float(request.args.get('h2'))
+        'h2': float(request.args.get('h2')),
+        'area': float(request.args.get('area'))
     }
     deg2rad()
     if triangulo['catetoA'] != 0 and triangulo['catetoB'] != 0 and triangulo['hipotenusa'] != 0:
         if e_retangulo(triangulo['catetoA'], triangulo['catetoB'], triangulo['hipotenusa']):
             pass
         else:
-            return 'não é retangulo'
+            return 'Os valores que você inseriu não formam um triângulo retângulo', 400
 
     if triangulo['catetoA'] != 0 and triangulo['catetoB'] != 0:
         triangulo['hipotenusa'] = sqrt(triangulo['catetoA']**2+triangulo['catetoB']**2)
@@ -49,11 +50,11 @@ def hello():
     triangulo['altura'] = (triangulo['catetoA']*triangulo['catetoB'])/triangulo['hipotenusa']
     triangulo['h1'] = sqrt(triangulo['catetoA']**2-triangulo['altura']**2)
     triangulo['h2'] = triangulo['hipotenusa'] - triangulo['h1']
-
+    triangulo['area'] = (triangulo['catetoB']*triangulo['catetoA'])/2
     rad2deg()
 
     print(triangulo)
-    return triangulo
+    return triangulo, 200
 
 
 def e_retangulo(a, b, c):
