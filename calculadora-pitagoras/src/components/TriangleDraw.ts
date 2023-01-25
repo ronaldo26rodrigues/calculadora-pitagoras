@@ -65,7 +65,7 @@ export function TrianguloDraw({canvas, valoresAbsolutos, valoresRelativos, ponto
     ctx.lineWidth = 5;
     
     
-    ctx.font = '22px Arial'
+    ctx.font = `${0.04*canvasSize}px Arial`
 
     function txtLegenda(valor:number, seZero: string, eAngulo=false) {
         return `${valor==0?seZero:valor.toFixed(2)}${eAngulo?'º':''}`
@@ -81,7 +81,7 @@ export function TrianguloDraw({canvas, valoresAbsolutos, valoresRelativos, ponto
         ctx.fillText(txtLegenda(valoresAbsolutos.catetoB, 'b'), canvasSize/2, pontoPartida.y+catetoA+25);
 
         ctx.fillText(txtLegenda(valoresAbsolutos.hipotenusa, 'c'), pontoPartida.x+0.5*catetoB, pontoPartida.y+(0.45)*catetoA);
-        ctx.font = '20px Arial'
+        ctx.font = `${0.035*canvasSize}px Arial`
     
         if(alturaOn) ctx.fillText(txtLegenda(valoresAbsolutos.h1, 'm'), pontoPartida.x+0.25*catetoB, pontoPartida.y+(0.22)*catetoA);
         if(alturaOn) ctx.fillText(txtLegenda(valoresAbsolutos.h2, 'n'), pontoPartida.x+0.80*catetoB, pontoPartida.y+(0.75)*catetoA);

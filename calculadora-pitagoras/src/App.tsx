@@ -42,7 +42,7 @@ function App() {
       <div className="flex flex-col xl:flex-row sm:justify-between h-max  text-center items-center xl:items-start gap-y-12">
         <FormCalc setLinhaDestacada={setLinhaDestacada} valoresAbsolutos={valoresAbsolutos} setValoresAbsolutos={setValoresAbsolutos}/>
         <TriangleShape
-          canvasSize={screenSize<620?0.8*screenSize:500}
+          canvasSize={screenSize<620?0.8*screenSize:600}
           canvasPadding={150}
           labelsOn={true}
           alturaOn={true}
