@@ -76,8 +76,8 @@ export function TrianguloDraw({canvas, valoresAbsolutos, valoresRelativos, ponto
         ctx.textAlign = 'end';
         ctx.fillText(txtLegenda(valoresAbsolutos.catetoA, 'a'), pontoPartida.x-12,canvasSize/2);
         ctx.textAlign = 'start';
-        ctx.fillText(txtLegenda(valoresAbsolutos.anguloA, 'A', true), pontoPartida.x-10,pontoPartida.y-5);
-        ctx.fillText(txtLegenda(valoresAbsolutos.anguloB, 'B'), pontoPartida.x+catetoB+5,pontoPartida.y+catetoA+10);
+        ctx.fillText(txtLegenda(valoresAbsolutos.anguloB, 'B', true), pontoPartida.x-10,pontoPartida.y-5);
+        ctx.fillText(txtLegenda(valoresAbsolutos.anguloA, 'A', true), pontoPartida.x+catetoB+5,pontoPartida.y+catetoA+10);
         ctx.fillText(txtLegenda(valoresAbsolutos.catetoB, 'b'), canvasSize/2, pontoPartida.y+catetoA+25);
 
         ctx.fillText(txtLegenda(valoresAbsolutos.hipotenusa, 'c'), pontoPartida.x+0.5*catetoB, pontoPartida.y+(0.45)*catetoA);
