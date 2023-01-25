@@ -1,6 +1,7 @@
 import React from "react";
 import { Triangle } from "../models/Triangle";
 import { HorizontalLine } from "./HorizontalLine";
+import { ResultItem } from "./ResultItem";
 
 interface ResultsProps {
     valoresAbsolutos: Triangle
@@ -9,20 +10,20 @@ interface ResultsProps {
 export function Results({valoresAbsolutos}: ResultsProps) {
     const {altura, anguloA, anguloB, catetoA, catetoB, h1, h2, hipotenusa, area} = valoresAbsolutos
     return <div className="flex flex-col text-3xl xl:items-start gap-y-2 ">
-        <p className="">Cateto a: {catetoA}</p>
+        <ResultItem label="Cateto a" value={catetoA}/>
         <HorizontalLine/>
-        <p>Cateto b: {catetoB.toFixed(2)}</p>
+        <ResultItem label="Cateto b" value={catetoB}/>
         <HorizontalLine/>
-        <p>Hipotenusa: {hipotenusa.toFixed(2)}</p>
+        <ResultItem label="Hipotenusa" value={hipotenusa}/>
         <HorizontalLine/>
-        <p>Ângulo A: {anguloA.toFixed(2)}</p>
+        <ResultItem label="Ângulo A" value={anguloA}/>
         <HorizontalLine/>
-        <p>Ângulo B: {anguloB.toFixed(2)}</p>
+        <ResultItem label="Ângulo B" value={anguloB}/>
         <HorizontalLine/>
-        <p>Segmento AC: {h1.toFixed(2)}</p>
+        <ResultItem label="Segmento AC" value={h1}/>
         <HorizontalLine/>
-        <p>Segmento CB: {h2.toFixed(2)}</p>
+        <ResultItem label="Segmento CB" value={h2}/>
         <HorizontalLine/>
-        <p>Área: {area.toFixed(2)}</p>
+        <ResultItem label="Área" value={area}/>
     </div>
 }

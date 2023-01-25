@@ -20,9 +20,9 @@ export function FormInput({ setLinhaDestacada, name, label, linha, onChange, ifU
   }
   return (
     <div className="grid">
-      <label htmlFor={name}>{label}</label>
+      <label htmlFor={name} className="xl:text-xl my-1">{label}</label>
       <input id={id}
-      className="text-zinc-900"
+      className="text-zinc-900 xl:text-2xl py-1 px-2 rounded"
         type="number"
         name={name}
         onFocus={() => {
