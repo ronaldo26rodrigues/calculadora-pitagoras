@@ -48,12 +48,12 @@ export function TrianguloDraw({canvas, valoresAbsolutos, valoresRelativos, ponto
     ctx.stroke()
     ctx.beginPath()
     ctx.moveTo(pontoPartida.x,pontoPartida.y); // posiciona o cursor no ponto A
-    ctx.arc(pontoPartida.x,pontoPartida.y, 40, (Math.PI/180)*90, (Math.PI/180)*valoresAbsolutos['anguloA'], true); // desenha o ângulo do ponto A
+    ctx.arc(pontoPartida.x,pontoPartida.y, 0.065*canvasSize, (Math.PI/180)*90, (Math.PI/180)*valoresAbsolutos['anguloA'], true); // desenha o ângulo do ponto A
     ctx.moveTo(pontoPartida.x+catetoB,pontoPartida.y+catetoA); // posiciona o cursor no ponto B
     ctx.arc(
         pontoPartida.x+catetoB,
         pontoPartida.y+catetoA,
-        40,
+        0.065*canvasSize,
         (Math.PI/180)*180, 
         (Math.PI/180)*(180+valoresAbsolutos['anguloA']), 
         false); //desenha o ângulo do ponto B
@@ -62,7 +62,7 @@ export function TrianguloDraw({canvas, valoresAbsolutos, valoresRelativos, ponto
         ctx.beginPath()
     
     
-    ctx.lineWidth = 5;
+    ctx.lineWidth = 3;
     
     
     ctx.font = `${0.04*canvasSize}px Arial`
@@ -88,7 +88,7 @@ export function TrianguloDraw({canvas, valoresAbsolutos, valoresRelativos, ponto
         if(alturaOn) ctx.fillText(txtLegenda(valoresAbsolutos.altura, 'h'), pontoPartida.x+(proporcaoHipotenusa/1.5*catetoB), (pontoPartida.y+catetoA)-(((1-proporcaoHipotenusa)/2)*catetoA));
     }
     
-    ctx.fillRect(pontoPartida.x, pontoPartida.y+catetoA-25, 25, 25); // quadrado do ângulo reto
+    ctx.fillRect(pontoPartida.x, pontoPartida.y+catetoA-0.065*canvasSize, 0.065*canvasSize, 0.065*canvasSize); // quadrado do ângulo reto
     ctx.fill();
     ctx.fillStyle = 'red'
     switch (linhaDestacada) {
@@ -110,7 +110,7 @@ export function TrianguloDraw({canvas, valoresAbsolutos, valoresRelativos, ponto
             break;
         case 'A':
             ctx.moveTo(pontoPartida.x,pontoPartida.y); // posiciona o cursor no ponto A
-            ctx.arc(pontoPartida.x,pontoPartida.y, 40, (Math.PI/180)*90, (Math.PI/180)*valoresAbsolutos['anguloA'], true); // desenha o ângulo do ponto A
+            ctx.arc(pontoPartida.x,pontoPartida.y, 0.065*canvasSize, (Math.PI/180)*90, (Math.PI/180)*valoresAbsolutos['anguloA'], true); // desenha o ângulo do ponto A
             // ctx.fill()
             break;
         case 'B':
@@ -118,7 +118,7 @@ export function TrianguloDraw({canvas, valoresAbsolutos, valoresRelativos, ponto
     ctx.arc(
         pontoPartida.x+catetoB,
         pontoPartida.y+catetoA,
-        40,
+        0.065*canvasSize,
         (Math.PI/180)*180, 
         (Math.PI/180)*(180+valoresAbsolutos['anguloA']), 
         false); //desenha o ângulo do ponto B
