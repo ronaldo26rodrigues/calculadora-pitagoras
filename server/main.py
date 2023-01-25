@@ -1,7 +1,7 @@
 from flask import Flask, request
 from flask_cors import CORS
 from math import sqrt, atan, tan, sin
-from util import *
+from util import rad2deg, e_retangulo, calcular_angulo_b, calcular_angulo_ab, deg2rad, calcular_angulo_a
 
 app = Flask(__name__)
 CORS(app)

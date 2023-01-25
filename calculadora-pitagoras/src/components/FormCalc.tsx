@@ -74,6 +74,11 @@ export function FormCalc({
             ifUndefined={valoresAbsolutos.anguloA}
             onChange={(value) => {
               (document.getElementById('anguloB') as HTMLInputElement).value = `${90-value}`
+              if(value>=90) {
+                (document.getElementById('anguloA') as HTMLInputElement).value = '89';
+                (document.getElementById('anguloB') as HTMLInputElement).value = '1';
+                formValues.anguloA = 89;
+              }
               formValues.anguloB = 90-value
               setFormValues({...formValues, anguloA: value });
             }}
@@ -87,6 +92,11 @@ export function FormCalc({
             ifUndefined={valoresAbsolutos.anguloB}
             onChange={(value) => {
               (document.getElementById('anguloA') as HTMLInputElement).value = `${90-value}`
+              if(value>=90) {
+                (document.getElementById('anguloB') as HTMLInputElement).value = '89';
+                (document.getElementById('anguloA') as HTMLInputElement).value = '1'
+                formValues.anguloB = 89
+              }
               formValues.anguloA = 90-value
               setFormValues({...formValues, anguloB: value });
             }}

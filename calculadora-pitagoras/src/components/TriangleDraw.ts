@@ -24,11 +24,7 @@ export function TrianguloDraw({canvas, valoresAbsolutos, valoresRelativos, ponto
     grd.addColorStop(0, '#09c184');
     grd.addColorStop(1, '#0c5149');
 
-    
-    console.log(valoresRelativos.catetoA);
-    
-    
-    console.log(pontoPartida);
+    // labelsOn = Math.abs(catetoA-catetoB) < 0.65*canvasSize
     
     // Fill with gradient
     ctx.fillStyle = grd;
@@ -48,12 +44,12 @@ export function TrianguloDraw({canvas, valoresAbsolutos, valoresRelativos, ponto
     ctx.stroke()
     ctx.beginPath()
     ctx.moveTo(pontoPartida.x,pontoPartida.y); // posiciona o cursor no ponto A
-    ctx.arc(pontoPartida.x,pontoPartida.y, 0.065*canvasSize, (Math.PI/180)*90, (Math.PI/180)*valoresAbsolutos['anguloA'], true); // desenha o ângulo do ponto A
+    ctx.arc(pontoPartida.x,pontoPartida.y, 0.05*canvasSize, (Math.PI/180)*90, (Math.PI/180)*valoresAbsolutos['anguloA'], true); // desenha o ângulo do ponto A
     ctx.moveTo(pontoPartida.x+catetoB,pontoPartida.y+catetoA); // posiciona o cursor no ponto B
     ctx.arc(
         pontoPartida.x+catetoB,
         pontoPartida.y+catetoA,
-        0.065*canvasSize,
+        0.05*canvasSize,
         (Math.PI/180)*180, 
         (Math.PI/180)*(180+valoresAbsolutos['anguloA']), 
         false); //desenha o ângulo do ponto B
@@ -88,7 +84,7 @@ export function TrianguloDraw({canvas, valoresAbsolutos, valoresRelativos, ponto
         if(alturaOn) ctx.fillText(txtLegenda(valoresAbsolutos.altura, 'h'), pontoPartida.x+(proporcaoHipotenusa/1.5*catetoB), (pontoPartida.y+catetoA)-(((1-proporcaoHipotenusa)/2)*catetoA));
     }
     
-    ctx.fillRect(pontoPartida.x, pontoPartida.y+catetoA-0.065*canvasSize, 0.065*canvasSize, 0.065*canvasSize); // quadrado do ângulo reto
+    ctx.fillRect(pontoPartida.x, pontoPartida.y+catetoA-0.05*canvasSize, 0.05*canvasSize, 0.05*canvasSize); // quadrado do ângulo reto
     ctx.fill();
     ctx.fillStyle = 'red'
     switch (linhaDestacada) {

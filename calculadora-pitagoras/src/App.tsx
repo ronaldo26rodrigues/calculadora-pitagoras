@@ -43,7 +43,7 @@ function App() {
         <FormCalc setLinhaDestacada={setLinhaDestacada} valoresAbsolutos={valoresAbsolutos} setValoresAbsolutos={setValoresAbsolutos}/>
         <TriangleShape
           canvasSize={screenSize<620?0.8*screenSize:600}
-          canvasPadding={120}
+          canvasPadding={screenSize<620?120:160}
           labelsOn={true}
           alturaOn={true}
           linhaDestacada={linhaDestacada}
