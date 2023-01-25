@@ -105,7 +105,7 @@ export function FormCalc({
                   
                 }
             axios
-              .get("http://ronaldo26rodrigues.pythonanywhere.com/calculadora", {
+              .get("https://ronaldo26rodrigues.pythonanywhere.com/calculadora", {
                 params: {
                   catetoA: formValues.catetoA,
                   catetoB: formValues.catetoB,
