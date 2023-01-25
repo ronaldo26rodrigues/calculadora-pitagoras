@@ -3,7 +3,8 @@
 @tailwind utilities;
 
 body {
-  background-color: #D93E30;
+  background-color: #0d192b;
+  color: aliceblue;
 }
 
 /* :root {
