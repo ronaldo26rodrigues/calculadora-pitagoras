@@ -29,17 +29,17 @@ function App() {
   } as Triangle);
 
   return (
-    <div className="">
+    <div className="justify-center">
       <div>
         <h1 className="text-6xl mb-16">
           Teorema de Pitágoras
         </h1>
       </div>
-      <div className="flex justify-around h-max">
+      <div className="md:flex md:justify-around h-max sm:grid-cols-2">
         <Results valoresAbsolutos={valoresAbsolutos} />
         <TriangleShape
-          canvasSize={500}
-          canvasPadding={100}
+          canvasSize={600}
+          canvasPadding={200}
           labelsOn={true}
           alturaOn={true}
           linhaDestacada={linhaDestacada}

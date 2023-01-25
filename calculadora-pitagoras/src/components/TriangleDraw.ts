@@ -65,7 +65,7 @@ export function TrianguloDraw({canvas, valoresAbsolutos, valoresRelativos, ponto
     ctx.lineWidth = 5;
     
     
-    ctx.font = '24px Arial'
+    ctx.font = '22px Arial'
 
     function txtLegenda(valor:number, seZero: string, eAngulo=false) {
         return `${valor==0?seZero:valor.toFixed(2)}${eAngulo?'º':''}`

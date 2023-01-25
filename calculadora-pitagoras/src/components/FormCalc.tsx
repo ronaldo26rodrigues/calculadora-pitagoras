@@ -25,18 +25,21 @@ export function FormCalc({
     h2: 0,
     area: 6,
     } as Triangle);
+
+    const [errorText, setErrorText] = useState("")
   return (
     <>
-      <div className="flex flex-col">
-        <form className="flex flex-col space-y-4 ">
+      <div className="w-2/12">
+        <form className="flex flex-col space-y-4">
           <FormInput
             label="Cateto A"
             linha="a"
             name="catetoA"
+            id="catetoA"
             setLinhaDestacada={setLinhaDestacada}
             ifUndefined={valoresAbsolutos.catetoA}
             onChange={(value) => {
-              setFormValues({...valoresAbsolutos, catetoA: value });
+              setFormValues({...formValues, catetoA: value });
               
             }}
           />
@@ -44,80 +47,102 @@ export function FormCalc({
             label="Cateto B"
             linha="b"
             name="catetoB"
+            id="catetoB"
             setLinhaDestacada={setLinhaDestacada}
             ifUndefined={valoresAbsolutos.catetoB}
             onChange={(value) => {
-              setFormValues({...valoresAbsolutos, catetoB: value });
+              setFormValues({...formValues, catetoB: value });
             }}
           />
           <FormInput
             label="Hipotenusa"
             linha="c"
             name="hipotenusa"
+            id="hipotenusa"
             setLinhaDestacada={setLinhaDestacada}
             ifUndefined={valoresAbsolutos.hipotenusa}
             onChange={(value) => {
-              setFormValues({...valoresAbsolutos, hipotenusa: value });
+              setFormValues({...formValues, hipotenusa: value });
             }}
           />
           <FormInput
             label="Angulo A"
             linha="A"
             name="anguloA"
+            id="anguloA"
             setLinhaDestacada={setLinhaDestacada}
             ifUndefined={valoresAbsolutos.anguloA}
             onChange={(value) => {
-              setFormValues({...valoresAbsolutos, anguloA: value });
+              document.getElementById('anguloB').value = `${90-value}`
+              formValues.anguloB = 90-value
+              setFormValues({...formValues, anguloA: value });
             }}
           />
           <FormInput
             label="Angulo B"
             linha="B"
             name="anguloB"
+            id="anguloB"
             setLinhaDestacada={setLinhaDestacada}
             ifUndefined={valoresAbsolutos.anguloB}
             onChange={(value) => {
-              setFormValues({...valoresAbsolutos, anguloB: value });
+              document.getElementById('anguloA').value = `${90-value}`
+              formValues.anguloA = 90-value
+              setFormValues({...formValues, anguloB: value });
             }}
           />
-          <FormInput
-            label="Altura"
-            linha="h"
-            name="altura"
-            setLinhaDestacada={setLinhaDestacada}
-            ifUndefined={valoresAbsolutos.altura}
-            onChange={(value) => {
-              setFormValues({...valoresAbsolutos, altura: value });
-            }}
-          />
+          
         </form>
         <button
           className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 my-10 rounded"
           onClick={() => {
-            console.log(valoresAbsolutos);
-
+            console.log(formValues);
+            const inputs = document.querySelectorAll('input')
+                for (let i = 0; i < inputs.length; i++) {
+                  const element = inputs[i];
+                  element.value = ""
+                  console.log(element);
+                  
+                }
             axios
               .get("http://localhost:5000/calculadora", {
                 params: {
-                  catetoA: valoresAbsolutos.catetoA,
-                  catetoB: valoresAbsolutos.catetoB,
-                  hipotenusa: valoresAbsolutos.hipotenusa,
-                  anguloA: valoresAbsolutos.anguloA,
-                  anguloB: valoresAbsolutos.anguloB,
-                  altura: valoresAbsolutos.altura,
-                  h1: valoresAbsolutos.h1,
-                  h2: valoresAbsolutos.h2,
-                  area: valoresAbsolutos.area,
+                  catetoA: formValues.catetoA,
+                  catetoB: formValues.catetoB,
+                  hipotenusa: formValues.hipotenusa,
+                  anguloA: formValues.anguloA,
+                  anguloB: formValues.anguloB,
+                  altura: formValues.altura,
+                  h1: formValues.h1,
+                  h2: formValues.h2,
+                  area: formValues.area,
                 },
               })
               .then((res) => {
                 console.log(res.data);
+                var response = { ...res.data }
                 setValoresAbsolutos({ ...res.data });
+                setErrorText('')
+              }).catch((error)=>{
+                if(error.response.status==400) setErrorText(error.response.data);
+                if(error.response.status==500) setErrorText('Algo deu errado');
               });
+              setFormValues({
+                catetoB: 0,
+            catetoA: 0,
+            hipotenusa: 0,
+            anguloB: 0,
+            anguloA: 0,
+            altura: 0,
+            h1: 0,
+            h2: 0,
+            area: 0,
+            } as Triangle)
           }}
         >
           Calcular
         </button>
+        <p className="text-red-600">{errorText}</p>
       </div>
     </>
   );

@@ -7,9 +7,10 @@ interface FormInputProps {
   setLinhaDestacada: Function;
   onChange: (value:number)=>void
   ifUndefined:number
+  id:string
 }
 
-export function FormInput({ setLinhaDestacada, name, label, linha, onChange, ifUndefined }: FormInputProps) {
+export function FormInput({ setLinhaDestacada, name, label, linha, onChange, ifUndefined, id }: FormInputProps) {
   function handleChange(event: ChangeEvent<HTMLInputElement>) {
     const value = event.target.value
     
@@ -20,7 +21,7 @@ export function FormInput({ setLinhaDestacada, name, label, linha, onChange, ifU
   return (
     <div className="grid">
       <label htmlFor={name}>{label}</label>
-      <input
+      <input id={id}
       className="text-zinc-900"
         type="number"
         name={name}
