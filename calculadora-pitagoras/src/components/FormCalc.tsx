@@ -29,8 +29,8 @@ export function FormCalc({
     const [errorText, setErrorText] = useState("")
   return (
     <>
-      <div className="w-2/12">
-        <form className="flex flex-col space-y-4">
+      <div className=" flex flex-col w-2/12 items-center">
+        <form className="flex flex-col space-y-4 text-center justify-center">
           <FormInput
             label="Cateto A"
             linha="a"
@@ -105,7 +105,7 @@ export function FormCalc({
                   
                 }
             axios
-              .get("http://localhost:5000/calculadora", {
+              .get("http://ronaldo26rodrigues.pythonanywhere.com/calculadora", {
                 params: {
                   catetoA: formValues.catetoA,
                   catetoB: formValues.catetoB,
