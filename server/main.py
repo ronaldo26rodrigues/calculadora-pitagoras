@@ -9,6 +9,7 @@ CORS(app)
 
 @app.route("/calculadora")
 def calculadora():
+    # Tri6angulo recebido da requisição
     triangulo = {
         'catetoA': float(request.args.get('catetoA')),
         'catetoB': float(request.args.get('catetoB')),
@@ -20,12 +21,17 @@ def calculadora():
         'h2': float(request.args.get('h2')),
         'area': float(request.args.get('area'))
     }
-    deg2rad(triangulo)
+    deg2rad(triangulo)  # recebido em graus, convertido para radianos
+
+    # Se a requisição informa os 3 lados, primeiro testa se eles
+    # formam um triângulo retângulo para poder continuar os calculos
     if triangulo['catetoA'] != 0 and triangulo['catetoB'] != 0 and triangulo['hipotenusa'] != 0:
         if e_retangulo(triangulo['catetoA'], triangulo['catetoB'], triangulo['hipotenusa']):
             pass
         else:
             return 'Os valores que você inseriu não formam um triângulo retângulo', 400
+
+    # A partir deste ponto erros matemáticos podem ocorrer devido a valores inconsistentes
     try:
         if triangulo['catetoA'] != 0 and triangulo['catetoB'] != 0:
             triangulo['hipotenusa'] = sqrt(triangulo['catetoA']**2+triangulo['catetoB']**2)
@@ -55,6 +61,7 @@ def calculadora():
     except Exception:
         return 'Estes valores podem não estar corretos', 400
 
+    # altura e área
     triangulo['altura'] = (triangulo['catetoA']*triangulo['catetoB'])/triangulo['hipotenusa']
     triangulo['h1'] = sqrt(triangulo['catetoA']**2-triangulo['altura']**2)
     triangulo['h2'] = triangulo['hipotenusa'] - triangulo['h1']

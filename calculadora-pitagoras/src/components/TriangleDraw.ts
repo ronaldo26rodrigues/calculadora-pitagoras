@@ -16,6 +16,7 @@ interface TrianguloDrawProps {
 }
 
 export function TrianguloDraw({canvas, valoresAbsolutos, valoresRelativos, pontoPartida, proporcaoHipotenusa, canvasSize, alturaOn, labelsOn, linhaDestacada}: TrianguloDrawProps) {
+    // Função com a lógica que desenha o triângulo
     const {catetoA, catetoB, altura, anguloA, anguloB, h1, h2, hipotenusa} = valoresRelativos;
     const ctx = canvas.getContext('2d');
     ctx.clearRect(0,0,canvas.width,canvas.height)
