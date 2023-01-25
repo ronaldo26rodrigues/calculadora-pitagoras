@@ -73,7 +73,7 @@ export function FormCalc({
             setLinhaDestacada={setLinhaDestacada}
             ifUndefined={valoresAbsolutos.anguloA}
             onChange={(value) => {
-              document.getElementById('anguloB').value = `${90-value}`
+              (document.getElementById('anguloB') as HTMLInputElement).value = `${90-value}`
               formValues.anguloB = 90-value
               setFormValues({...formValues, anguloA: value });
             }}
@@ -86,7 +86,7 @@ export function FormCalc({
             setLinhaDestacada={setLinhaDestacada}
             ifUndefined={valoresAbsolutos.anguloB}
             onChange={(value) => {
-              document.getElementById('anguloA').value = `${90-value}`
+              (document.getElementById('anguloA') as HTMLInputElement).value = `${90-value}`
               formValues.anguloA = 90-value
               setFormValues({...formValues, anguloB: value });
             }}
