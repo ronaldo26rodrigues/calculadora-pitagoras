@@ -3,7 +3,6 @@ import Canvas from "./Canvas";
 import { Triangle } from "../models/Triangle";
 import { TrianguloDraw } from "./TriangleDraw";
 
-
 interface TrianguloProps {
   canvasSize: number;
   canvasPadding: number;
@@ -30,9 +29,9 @@ export function TriangleShape({
     h2: 0,
     area: 0,
   }; // estes valores são calculados para que o triângulo se encaixe na área do canvas
-
-  const [labelsOn, setLabelsOn] = useState(true)
-  const [alturaOn, setAlturaOn] = useState(true)
+  // Elemento que exibe o triângulo na página
+  const [labelsOn, setLabelsOn] = useState(true);
+  const [alturaOn, setAlturaOn] = useState(true);
 
   var proporcaoHipotenusa = 0; // valor da reta m, cateto de um dos triângulos formados pela reta da altura
   var { catetoA, catetoB, altura, anguloA, anguloB, h1, h2, hipotenusa } =
@@ -41,7 +40,7 @@ export function TriangleShape({
   function calculoMedidasRelativas() {
     // o maior cateto encaixa no tamanho máximo do canvas, e os demais valores são calculados a partir desta proporção
     console.log(valoresAbsolutos);
-    
+
     const proporcao =
       (canvasSize - canvasPadding) /
       (valoresAbsolutos["catetoA"] > valoresAbsolutos["catetoB"]
@@ -68,34 +67,51 @@ export function TriangleShape({
 
   return (
     <div>
-
-    <Canvas
-      width={canvasSize}
-      height={canvasSize}
-      draw={(canvas) => {
+      <Canvas
+        width={canvasSize}
+        height={canvasSize}
+        draw={(canvas) => {
           TrianguloDraw({
-              canvas,
-              canvasSize,
-              alturaOn,
-              labelsOn,
-              linhaDestacada,
-              pontoPartida,
-              proporcaoHipotenusa,
-              valoresAbsolutos,
-              valoresRelativos,
-            });
+            canvas,
+            canvasSize,
+            alturaOn,
+            labelsOn,
+            linhaDestacada,
+            pontoPartida,
+            proporcaoHipotenusa,
+            valoresAbsolutos,
+            valoresRelativos,
+          });
         }}
-        />
-        <div className="flex items-center justify-around my-4">
-            <div className="flex items-center">
-                <input type="checkbox" name="labelsOn" id="labelsOn" className="accent-blue-600 mx-2" checked={labelsOn} onClick={()=>{setLabelsOn(!labelsOn)}}/>
-                <span>Legendas</span>
-            </div>
-            <div>
-                <input type="checkbox" name="alturaOn" id="alturaOn" className="accent-blue-600 mx-2" checked={alturaOn} onClick={()=>{setAlturaOn(!alturaOn)}}/>
-                <span>Altura</span>
-            </div>
+      />
+      <div className="flex items-center justify-around my-4">
+        <div className="flex items-center">
+          <input
+            type="checkbox"
+            name="labelsOn"
+            id="labelsOn"
+            className="accent-blue-600 mx-2"
+            checked={labelsOn}
+            onClick={() => {
+              setLabelsOn(!labelsOn);
+            }}
+          />
+          <span>Legendas</span>
         </div>
+        <div>
+          <input
+            type="checkbox"
+            name="alturaOn"
+            id="alturaOn"
+            className="accent-blue-600 mx-2"
+            checked={alturaOn}
+            onClick={() => {
+              setAlturaOn(!alturaOn);
+            }}
+          />
+          <span>Altura</span>
+        </div>
+      </div>
     </div>
   );
 }

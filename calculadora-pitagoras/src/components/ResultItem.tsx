@@ -1,9 +1,15 @@
-import React from 'react'
+import React from "react";
 
 interface ResultItemProps {
-    label:string, value:number
+  label: string;
+  value: number;
 }
 
-export function ResultItem({label, value}: ResultItemProps) {
-    return <p className="">{label}: <span className="text-blue-300">{value.toFixed(2)}</span></p>
+export function ResultItem({ label, value }: ResultItemProps) {
+  // Item exibido no resultado
+  return (
+    <p className="">
+      {label}: <span className="text-blue-300">{value.toFixed(2)}</span>
+    </p>
+  );
 }

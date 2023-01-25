@@ -1,4 +1,5 @@
 export type Triangle = {
+  // Define os campos do triângulo
   catetoA: number;
   catetoB: number;
   anguloA: number;
