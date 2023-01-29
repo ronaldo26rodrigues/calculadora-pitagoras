@@ -10,7 +10,8 @@ Fornecendo dois valores, a calculadora é capaz de encontrar os demais, exibindo
 ## Executar localmente
 
 A aplicação foi feita usando o framework de desenvolvimento front-end React, e Typescript. É possível instalar todas as dependências a partir do arquivo `package.json`, com o comando `npm install`, e executado com `npm run dev`
-O backend foi feito com o frameword de desenvolvimento web em python Flask, que também pode ser instalado com o comando `pip install -r requirements.txt`, e executado com `flask --app main run` (para executar em modo de desenvolvimento, e após configurar o [ambiente virtual do python]https://docs.python.org/pt-br/3/library/venv.html)O backend foi feito com o frameword de desenvolvimento web em python Flask, que também pode ser instalado com o comando `pip install -r requirements.txt`, e executado com `flask --app main run` (para executar em modo de desenvolvimento, e após configurar o [ambiente virtual do python]https://docs.python.org/pt-br/3/library/venv.html)O backend foi feito com o frameword de desenvolvimento web em python Flask, que também pode ser instalado com o comando `pip install -r requirements.txt`, e executado com `flask --app main run` (para executar em modo de desenvolvimento, e após configurar o [ambiente virtual do python](https://docs.python.org/pt-br/3/library/venv.html))
+
+O backend foi feito com o frameword de desenvolvimento web em python Flask, que também pode ser instalado com o comando `pip install -r requirements.txt`, e executado com `flask --app main run` (para executar em modo de desenvolvimento, e após configurar o [ambiente virtual do python](https://docs.python.org/pt-br/3/library/venv.html)
 
 # Disponibilidade
 
